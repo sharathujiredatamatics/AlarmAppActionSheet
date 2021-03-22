@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import CoreData
 extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StorageClass.shared.alramData.count
@@ -38,45 +39,100 @@ extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
             cell.alarmType.text = "Once"
         }
         let state = StorageClass.shared.alramData[indexPath.row].state
+        cell.alarmState.addTarget(self, action: #selector(switchValueChange(_:)), for: .valueChanged)
         if state == true{
             cell.alarmState.isOn = true
+            
         }
         else if state == false{
             cell.alarmState.isOn = false
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
+            
         }
         return cell
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == UITableViewCell.EditingStyle.delete {
-                // Delete the row from the data source
-                managerContext.delete(StorageClass.shared.alarmCoreData[indexPath.row])
-                do{
-                    try managerContext.save()
-                }catch{
-                    print("Error :")
+    @objc func switchValueChange(_ sender: UISwitch!) {
+        let context = app.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName : "Alarm")
+        let hitPoint = sender.convert(CGPoint.zero, to: alarmTableView)
+        if let indexPath = alarmTableView.indexPathForRow(at: hitPoint) {
+            let identity = StorageClass.shared.alramData[indexPath.row].identifier
+            let type = StorageClass.shared.alramData[indexPath.row].type
+            let time = StorageClass.shared.alramData[indexPath.row].time
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.dateFormat = "HH"
+            let hour: String = dateFormatter.string(from: time)
+            dateFormatter.dateFormat = "mm"
+            let min: String = dateFormatter.string(from: time)
+            fetchRequest.predicate = NSPredicate(format: "identifier = %@",identity)
+            do
+            {
+                let alarm = try context.fetch(fetchRequest)
+                let objectUpdate = alarm[0] as! NSManagedObject
+                
+                if (sender.isOn){
+                    if type == true{
+                        objectUpdate.setValue(true, forKey: "state")
+                        setNotification(title : "Alarm", subTitle : "Repeat", hour : Int(hour)!, minute : Int(min)!, type: type, identifier: identity)
+                    }
+                    else if type == false{
+                        objectUpdate.setValue(true, forKey: "state")
+                        setNotification(title : "Alarm", subTitle : "Once", hour : Int(hour)!, minute : Int(min)!, type: type, identifier: identity)
+                    }
                 }
-                // delete from arrays
-                StorageClass.shared.alramData.remove(at: indexPath.row)
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
-                UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
-                // delete row from tableview
-                alarmTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-                alarmTableView.reloadData()
+                else{
+                    
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identity])
+                    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identity])
+                    objectUpdate.setValue(false, forKey: "state")
+                }
+                do{
+                    try context.save()
+                    StorageClass.shared.fetchAlarmData()
+                    alarmTableView.reloadData()
+                }
+                catch
+                {
+                    let Fetcherror = error as NSError
+                    print("error", Fetcherror.localizedDescription)
+                }
+            }
+                
+            catch{
+                print(error)
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            // Delete the row from the data source
+            managerContext.delete(StorageClass.shared.alarmCoreData[indexPath.row])
+            do{
+                try managerContext.save()
+            }catch{
+                print("Error :")
+            }
+            
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [StorageClass.shared.alramData[indexPath.row].identifier])
+            // delete from arrays
+            StorageClass.shared.alramData.remove(at: indexPath.row)
+            // delete row from tableview
+            alarmTableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            alarmTableView.reloadData()
         }
     }
     // GestureHandler function to delete the CollectionViewCell and also from coredata and array.
     func gestureHandler(){
-        let removeTableViewCell = UITapGestureRecognizer(target: self, action:  #selector(self.handleLongPressCollectionViewCell))
-        self.alarmTableView.addGestureRecognizer(removeTableViewCell)
+        //        let removeTableViewCell = UITapGestureRecognizer(target: self, action:  #selector(self.handleLongPressTableViewCell))
+        //        self.alarmTableView.addGestureRecognizer(removeTableViewCell)
     }
     
-    @objc func handleLongPressCollectionViewCell(gesture : UILongPressGestureRecognizer!) {
-            if gesture.state != .ended {
-                return
-            }
-        let alertController = UIAlertController(title: "\n", message: nil, preferredStyle: .alert)
+    @objc func handleLongPressTableViewCell(gesture : UILongPressGestureRecognizer!) {
+        if gesture.state != .ended {
+            return
+        }
+        let alertController = UIAlertController(title: nil , message: "Remove Alarm", preferredStyle: .alert)
         let selectAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
             let p = gesture.location(in: self.alarmTableView)
             if let indexPath = self.alarmTableView.indexPathForRow(at: p) {
@@ -101,5 +157,5 @@ extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
-
+    
 }

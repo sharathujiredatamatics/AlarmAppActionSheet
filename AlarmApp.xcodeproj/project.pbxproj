@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B2F3F5D26088E96008A966C /* alarm_clock_2015.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4B2F3F5C26088E96008A966C /* alarm_clock_2015.mp3 */; };
+		4B2F3F5F26089C7E008A966C /* AlarmDidResponseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2F3F5E26089C7E008A966C /* AlarmDidResponseAction.swift */; };
 		9D4F489F2604B2ED0092E4A1 /* AlarmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4F489E2604B2ED0092E4A1 /* AlarmData.swift */; };
 		9D7EC74F2604A4BF0020E3B2 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EC74E2604A4BF0020E3B2 /* AlarmTableViewCell.swift */; };
 		9D7EC7512604A8150020E3B2 /* AlramTableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EC7502604A8150020E3B2 /* AlramTableViewControllerExtension.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B2F3F5C26088E96008A966C /* alarm_clock_2015.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm_clock_2015.mp3; sourceTree = "<group>"; };
+		4B2F3F5E26089C7E008A966C /* AlarmDidResponseAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDidResponseAction.swift; sourceTree = "<group>"; };
 		9D4F489E2604B2ED0092E4A1 /* AlarmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmData.swift; sourceTree = "<group>"; };
 		9D7EC74E2604A4BF0020E3B2 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		9D7EC7502604A8150020E3B2 /* AlramTableViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlramTableViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -86,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B2F3F5B26088E81008A966C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				4B2F3F5C26088E96008A966C /* alarm_clock_2015.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		9D4F489B2604B2490092E4A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +139,7 @@
 			children = (
 				9DA7317A26051D77005928EC /* SetAlarmButtonExtension.swift */,
 				9DA7317B26051D77005928EC /* SetAlarmExtension.swift */,
+				4B2F3F5E26089C7E008A966C /* AlarmDidResponseAction.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -157,6 +170,7 @@
 				9D4F489B2604B2490092E4A1 /* Model */,
 				9D4F489C2604B2580092E4A1 /* View */,
 				9D4F489D2604B25E0092E4A1 /* Controller */,
+				4B2F3F5B26088E81008A966C /* Sounds */,
 				9DF7CDBF2604881200E4A4FF /* AppDelegate.swift */,
 				9DF7CDC92604881700E4A4FF /* Assets.xcassets */,
 				9DF7CDCB2604881700E4A4FF /* LaunchScreen.storyboard */,
@@ -288,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DF7CDCD2604881700E4A4FF /* LaunchScreen.storyboard in Resources */,
+				4B2F3F5D26088E96008A966C /* alarm_clock_2015.mp3 in Resources */,
 				9DF7CDCA2604881700E4A4FF /* Assets.xcassets in Resources */,
 				9DF7CDC52604881200E4A4FF /* Main.storyboard in Resources */,
 			);
@@ -321,6 +336,7 @@
 				9DA7317C26051D77005928EC /* SetAlarmButtonExtension.swift in Sources */,
 				9DF7CDC02604881200E4A4FF /* AppDelegate.swift in Sources */,
 				9D7EC74F2604A4BF0020E3B2 /* AlarmTableViewCell.swift in Sources */,
+				4B2F3F5F26089C7E008A966C /* AlarmDidResponseAction.swift in Sources */,
 				9D4F489F2604B2ED0092E4A1 /* AlarmData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

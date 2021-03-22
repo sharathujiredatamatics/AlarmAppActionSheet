@@ -29,8 +29,10 @@ class StorageClass{
     var type = Bool()
     var state = Bool()
     var identifier = Int()
+    var snoozeidentifier = Int()
     var alramData = [AlarmData]()
     var alarmCoreData = [NSManagedObject]()
+    var alarmSnoozeData = [NSManagedObject]()
     let managerContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     func fetchAlarmData(){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Alarm")
@@ -53,6 +55,7 @@ class StorageClass{
         }catch {
             print("Caught an error: \(error)")
         }
+        
     }
-
+    
 }

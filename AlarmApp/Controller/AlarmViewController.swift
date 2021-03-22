@@ -8,18 +8,21 @@
 
 import UIKit
 import UserNotifications
+import CoreData
 class AlarmViewController: UIViewController {
     @IBOutlet weak var alarmTableView: UITableView!
     let datePickerOutlet: UIDatePicker = UIDatePicker()
+    var alarmCoreData = [NSManagedObject]()
+    let app = UIApplication.shared.delegate as! AppDelegate
     let managerContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
         UNUserNotificationCenter.current().delegate = self
+        gestureHandler()
     }
     override func viewWillAppear(_ animated: Bool) {
         StorageClass.shared.fetchAlarmData()
-        print(StorageClass.shared.alramData.count)
     }
     @IBAction func setAlarm(_ sender: UIButton) {
         setAlarmButtonAction()

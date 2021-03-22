@@ -70,6 +70,8 @@ extension AlarmViewController{
             StorageClass.shared.type = false
             StorageClass.shared.state = false
             StorageClass.shared.identifier = StorageClass.shared.identifier + 1
+            StorageClass.shared.fetchAlarmData()
+            alarmTableView.reloadData()
         }
         catch
         {

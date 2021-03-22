@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OSx-uL-ThU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OSx-uL-ThU">
                                 <rect key="frame" x="10" y="30" width="300" height="370"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -30,36 +30,52 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iam-iI-7GK">
-                                                    <rect key="frame" x="15" y="11" width="212" height="27"/>
+                                                    <rect key="frame" x="15" y="19" width="212" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I34-hr-RvQ">
-                                                    <rect key="frame" x="15" y="48" width="212" height="23"/>
+                                                    <rect key="frame" x="15" y="56" width="212" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    </variation>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5O4-yU-wBx">
                                                     <rect key="frame" x="235" y="26" width="52" height="30"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="Ajl-MY-7sR"/>
-                                                        <constraint firstAttribute="height" constant="30" id="Qqq-Mh-xx1"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Ajl-MY-7sR">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="30" id="Qqq-Mh-xx1">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="0.78044734589041098" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iam-iI-7GK" firstAttribute="leading" secondItem="3Tw-Ym-JgD" secondAttribute="leadingMargin" id="2qC-GZ-lxb"/>
-                                                <constraint firstItem="I34-hr-RvQ" firstAttribute="top" secondItem="iam-iI-7GK" secondAttribute="bottom" constant="10" id="C3u-4g-JzO"/>
+                                                <constraint firstItem="I34-hr-RvQ" firstAttribute="top" secondItem="iam-iI-7GK" secondAttribute="bottom" constant="10" id="C3u-4g-JzO">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                                </constraint>
                                                 <constraint firstItem="5O4-yU-wBx" firstAttribute="trailing" secondItem="3Tw-Ym-JgD" secondAttribute="trailingMargin" id="CTn-mh-2ew"/>
-                                                <constraint firstItem="I34-hr-RvQ" firstAttribute="bottom" secondItem="3Tw-Ym-JgD" secondAttribute="bottomMargin" id="I2F-OG-wDH"/>
+                                                <constraint firstItem="I34-hr-RvQ" firstAttribute="bottom" secondItem="3Tw-Ym-JgD" secondAttribute="bottomMargin" constant="8" id="I2F-OG-wDH">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                                </constraint>
                                                 <constraint firstItem="5O4-yU-wBx" firstAttribute="centerY" secondItem="3Tw-Ym-JgD" secondAttribute="centerY" id="Pu1-A5-Ovv"/>
                                                 <constraint firstItem="I34-hr-RvQ" firstAttribute="leading" secondItem="3Tw-Ym-JgD" secondAttribute="leadingMargin" id="R5g-6A-eHl"/>
                                                 <constraint firstItem="I34-hr-RvQ" firstAttribute="trailing" secondItem="iam-iI-7GK" secondAttribute="trailing" id="bON-Xq-PkM"/>
-                                                <constraint firstItem="iam-iI-7GK" firstAttribute="top" secondItem="3Tw-Ym-JgD" secondAttribute="topMargin" id="ehu-sl-aof"/>
+                                                <constraint firstItem="iam-iI-7GK" firstAttribute="top" secondItem="3Tw-Ym-JgD" secondAttribute="topMargin" constant="8" id="ehu-sl-aof">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                                </constraint>
                                                 <constraint firstItem="5O4-yU-wBx" firstAttribute="leading" secondItem="iam-iI-7GK" secondAttribute="trailing" constant="8" id="lwB-Cm-hFL"/>
                                             </constraints>
                                         </tableViewCellContentView>
