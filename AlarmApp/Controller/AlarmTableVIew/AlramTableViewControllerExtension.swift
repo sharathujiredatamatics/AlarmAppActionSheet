@@ -26,10 +26,20 @@ extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
         let min: String = dateFormatter.string(from: time)
         if intHour! >= 12{
             let hourDisplay = intHour! - 12
-            cell.alarmTime.text = "\(hourDisplay) : \(min) PM"
+            if hourDisplay == 0{
+                cell.alarmTime.text = "\(12) : \(min) PM"
+            }
+            else{
+                cell.alarmTime.text = "\(hourDisplay) : \(min) PM"
+            }
         }
         else{
-            cell.alarmTime.text = "\(hour) : \(min) AM"
+            if intHour == 0{
+                cell.alarmTime.text = "\(12) : \(min) AM"
+            }
+            else{
+                cell.alarmTime.text = "\(hour) : \(min) AM"
+            }
         }
         let type = StorageClass.shared.alramData[indexPath.row].type
         if type == true{

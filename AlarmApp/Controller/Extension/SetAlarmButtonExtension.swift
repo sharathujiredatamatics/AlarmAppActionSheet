@@ -9,23 +9,25 @@
 import UIKit
 extension AlarmViewController{
     func setAlarmButtonAction(){
-        datePickerOutlet.frame = CGRect(x: 0, y: 15, width: 270, height: 200)
-        let alertController = UIAlertController(title: "\n\n\n\n\n\n", message: "\n\n\n\n\n", preferredStyle: .alert)
+        datePickerOutlet.frame = CGRect(x: 75, y: 15, width: 270, height: 200)
+        let alertController = UIAlertController(title: "\n\n\n\n\n\n", message: "\n\n\n\n\n\n", preferredStyle: .actionSheet)
         datePickerOutlet.datePickerMode = UIDatePicker.Mode.time
-        let alarmTypeLabel = UILabel(frame:CGRect(x: 50, y: 220, width: 100, height: 20))
+        let alarmTypeLabel = UILabel(frame:CGRect(x: 120, y: 220, width: 100, height: 20))
         alarmTypeLabel.text = "Repeat :"
         alarmTypeLabel.font.withSize(30)
-        let alarmType = UISwitch(frame:CGRect(x: 150, y: 220, width: 0, height: 0))
+        let alarmType = UISwitch(frame:CGRect(x: 240, y: 220, width: 0, height: 0))
         alarmType.isOn = false
         alarmType.setOn(false, animated: false)
         alarmType.addTarget(self, action: #selector(switchValueDidChange(_:)), for: .valueChanged)
         alertController.view.addSubview(datePickerOutlet)
         alertController.view.addSubview(alarmTypeLabel)
         alertController.view.addSubview(alarmType)
-        let selectAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        let selectAction = UIAlertAction(title: "Set Alarm", style: .default, handler: { _ in
             self.saveNotificationButton()
         })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        })
         alertController.addAction(selectAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
