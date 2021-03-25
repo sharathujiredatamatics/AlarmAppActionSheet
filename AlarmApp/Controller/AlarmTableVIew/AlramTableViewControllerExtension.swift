@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import CoreData
+// AlarmViewController Extension to manage TableViewCell Action.
 extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StorageClass.shared.alramData.count
@@ -60,6 +61,7 @@ extension AlarmViewController: UITableViewDelegate, UITableViewDataSource{
         }
         return cell
     }
+    // Function to do detect switch action chnage and change value accordingly.
     @objc func switchValueChange(_ sender: UISwitch!) {
         let context = app.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName : "Alarm")

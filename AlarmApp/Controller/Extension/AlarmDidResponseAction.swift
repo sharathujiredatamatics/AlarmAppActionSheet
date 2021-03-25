@@ -9,7 +9,9 @@
 import UIKit
 import CoreData
 import UserNotifications
+// AlarmViewController to manage notification response.
 extension AlarmViewController{
+    // Function to off alarm from response.
     func resetResponseActionOnce(identity : String){
         let context = app.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName : "Alarm")
@@ -32,12 +34,11 @@ extension AlarmViewController{
                 print("error", Fetcherror.localizedDescription)
             }
         }
-            
         catch{
             print(error)
         }
-        
     }
+    // Function to off snooze alarm from response.
     func resetResponseActionRepeat(identity : String){
         let context = app.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName : "Alarm")
@@ -48,8 +49,6 @@ extension AlarmViewController{
             let objectUpdate = alarm[0] as! NSManagedObject
             objectUpdate.setValue(true, forKey: "state")
             let time = objectUpdate.value(forKey: "time") as! Date
-            
-            
             //            let time = StorageClass.shared.alramData[indexPath.row].time
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -69,10 +68,8 @@ extension AlarmViewController{
                 print("error", Fetcherror.localizedDescription)
             }
         }
-            
         catch{
             print(error)
         }
-        
     }
 }

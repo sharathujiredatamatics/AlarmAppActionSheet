@@ -7,7 +7,9 @@
 //
 
 import UIKit
+// AalrmViewController extension for setting alarm.
 extension AlarmViewController{
+    // Function to get alarm time and other information.
     func setAlarmButtonAction(){
         datePickerOutlet.frame = CGRect(x: 75, y: 15, width: 270, height: 200)
         let alertController = UIAlertController(title: "\n\n\n\n\n\n", message: "\n\n\n\n\n\n", preferredStyle: .actionSheet)
@@ -40,6 +42,7 @@ extension AlarmViewController{
             StorageClass.shared.type = false
         }
     }
+    // Functoin to set alarm and save notification.
     func saveNotificationButton(){
         let app = UIApplication.shared.delegate as! AppDelegate
         let context = app.persistentContainer.viewContext
@@ -48,8 +51,6 @@ extension AlarmViewController{
         entity.type = StorageClass.shared.type
         entity.state = true
         entity.identifier = "Identifier\(StorageClass.shared.identifier)"
-        
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.dateFormat = "HH"

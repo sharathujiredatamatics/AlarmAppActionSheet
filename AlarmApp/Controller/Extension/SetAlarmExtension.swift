@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import CoreData
+// AlarmViewController Extension to set alarm notification.
 extension AlarmViewController : UNUserNotificationCenterDelegate {
     func setNotification(title : String, subTitle : String, hour : Int, minute : Int, type :Bool, identifier : String){
         var dateComponent = DateComponents()
@@ -31,10 +32,11 @@ extension AlarmViewController : UNUserNotificationCenterDelegate {
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
+    // Function to get user response like snoooze and off.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void)
     {
         let timeBefore = Date()
-        let time = timeBefore.addingTimeInterval(5*60)
+        let time = timeBefore.addingTimeInterval(2*60)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatter.dateFormat = "HH"
@@ -63,10 +65,10 @@ extension AlarmViewController : UNUserNotificationCenterDelegate {
         else
         {
             if response.notification.request.content.subtitle == "Once"{
-                resetResponseActionOnce(identity : identifier)
+                setNotification(title : "Alarm", subTitle : response.notification.request.content.subtitle, hour : Int(hour)!, minute : Int(min)!, type: false, identifier: identifier)
             }
-            else if response.notification.request.content.subtitle == "Repeat"{
-                resetResponseActionRepeat(identity : identifier)
+            if response.notification.request.content.subtitle == "Repeat"{
+                setNotification(title : "Alarm", subTitle : response.notification.request.content.subtitle, hour : Int(hour)!, minute : Int(min)!, type: true, identifier: identifier)
             }
         }
         completionHandler()

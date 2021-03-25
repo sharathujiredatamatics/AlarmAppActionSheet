@@ -9,6 +9,7 @@
 import UIKit
 import UserNotifications
 import CoreData
+// AlarmViewController which is the main ViewController for interacting with user inputs and coredata.
 class AlarmViewController: UIViewController {
     @IBOutlet weak var alarmTableView: UITableView!
     let datePickerOutlet: UIDatePicker = UIDatePicker()
@@ -24,6 +25,7 @@ class AlarmViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         StorageClass.shared.fetchAlarmData()
     }
+    // Button function to set alarm.
     @IBAction func setAlarm(_ sender: UIButton) {
         setAlarmButtonAction()
     }

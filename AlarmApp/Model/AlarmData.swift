@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+// Structure for initilizing Alarm Data.
 struct AlarmData {
     var time: Date
     var type : Bool
@@ -21,6 +22,7 @@ struct AlarmData {
     }
 }
 
+// Singleton Class to manage coredata.
 class StorageClass{
     static let shared = StorageClass()
     init() {
@@ -44,7 +46,7 @@ class StorageClass{
             self.alramData.removeAll()
             // Retrieving data 1 by 1
             for alarm in alarmCoreData {
-                // Append data to arrays
+                // Append data to arrayså
                 let time = alarm.value(forKey: "time")
                 let type = alarm.value(forKey: "type")
                 let state = alarm.value(forKey: "state")
@@ -55,7 +57,5 @@ class StorageClass{
         }catch {
             print("Caught an error: \(error)")
         }
-        
     }
-    
 }
